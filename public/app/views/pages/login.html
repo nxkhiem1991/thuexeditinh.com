@@ -1,0 +1,33 @@
+<div class="login-bg" ng-controller="MainController as login">
+    <div class="container">
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>Đăng nhập quản trị</h2>
+                    <p>Vui lòng nhập tên tài khoản và mật khẩu</p>
+                </div>
+                <form id="Login" method="POST" ng-submit="login.doLogin()">
+                    <div class="form-group">
+                        <input type="username"
+                               class="form-control"
+                               id="inputEmail"
+                               ng-model="login.loginData.username"
+                               placeholder="Tên tài khoản">
+                    </div>
+                    <div class="form-group">
+                        <input type="password"
+                               class="form-control"
+                               id="inputPassword"
+                               ng-model="login.loginData.password"
+                               placeholder="Mật khẩu">
+                    </div>
+                    <div class="forgot">
+                        <a href="#">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                </form>
+            </div>
+            <p class="botto-text"> Designed by Khiem Gate</p>
+        </div>
+    </div>
+</div>
