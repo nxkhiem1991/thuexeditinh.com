@@ -1,1 +1,1 @@
-angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService']);
+angular.module('MyApp', ['appRoutes', 'myComponent', 'mainCtrl', 'authService', 'config']);

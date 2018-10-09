@@ -116,7 +116,7 @@ module.exports = function (app, express) {
         });
 
     api.get('/me', function (req, res) {
-       return res.json(req.decoded);
+        return res.json(req.decoded);
     });
 
     return api;

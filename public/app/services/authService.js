@@ -6,7 +6,7 @@ angular.module('authService', [])
             username: username,
             password: password
         }).then(function (data) {
-            AuthToken.setToken(data.token);
+            AuthToken.setToken(data.data.token);
             return data;
         })
     };
@@ -20,7 +20,7 @@ angular.module('authService', [])
     };
     
     authFactory.getUser =function () {
-      if(AuthToken.getToken) {
+      if(AuthToken.getToken()) {
           return $http.get('/api/me');
       } else {
           return $q.reject({msg: "User has no token!"});

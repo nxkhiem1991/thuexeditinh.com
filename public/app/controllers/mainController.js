@@ -19,15 +19,14 @@ angular.module('mainCtrl', [])
             .then(function (data) {
                 vm.processing = false;
                 Auth.getUser().then(function (data) {
-                    console.log(data);
                     vm.user = data.data;
                 });
 
-                // if(data.data.success) {
-                //     $location.path('/');
-                // } else {
-                //     return vm.error = data.msg;
-                // }
+                if(data.data.success) {
+                    $location.path('/');
+                } else {
+                    return vm.error = data.msg;
+                }
             });
     };
 
