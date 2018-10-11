@@ -1,5 +1,8 @@
-angular.module('mainCtrl', [])
-.controller('MainController', function ($rootScope, $location, Auth) {
+angular.module('mainCtrl', ['chieffancypants.loadingBar'])
+.config(function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+})
+.controller('MainController', function ($rootScope, $location, Auth, cfpLoadingBar) {
     var vm = this;
 
     vm.loggedIn = Auth.isLoggedIn();
@@ -10,6 +13,21 @@ angular.module('mainCtrl', [])
             vm.user = data.data;
         })
     });
+
+    vm.doSignUp = function () {
+        cfpLoadingBar.start();
+        vm.error = '';
+
+        Auth.signup(vm.singUpData)
+            .then(function (res) {
+                cfpLoadingBar.complete();
+                vm.user = res.data.user;
+            })
+            .catch(function (err, status) {
+                cfpLoadingBar.complete();
+                vm.error = err.data.validate;
+            });
+    };
 
     vm.doLogin = function () {
         vm.processing = true;

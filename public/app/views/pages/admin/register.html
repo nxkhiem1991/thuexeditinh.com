@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="MainController as mainCtrl">
     <div class="card card-register mx-auto mt-5">
         <h4 class="card-header">Đăng ký tài khoản</h4>
         <div class="card-body">
@@ -7,15 +7,23 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="text" id="firstName" class="form-control" placeholder="Họ"
-                                       required="required" autofocus="autofocus">
+                                <input type="text" id="firstName"
+                                       name="firstName"
+                                       ng-model="mainCtrl.singUpData.firstName"
+                                       class="form-control"
+                                       placeholder="Họ"
+                                       autofocus="autofocus">
                                 <label for="firstName">Họ</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="text" id="lastName" class="form-control" placeholder="Tên"
-                                       required="required">
+                                <input type="text"
+                                       id="lastName"
+                                       name="lastName"
+                                       ng-model="mainCtrl.singUpData.lastName"
+                                       class="form-control"
+                                       placeholder="Tên">
                                 <label for="lastName">Tên</label>
                             </div>
                         </div>
@@ -23,14 +31,47 @@
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email"
-                               required="required" autofocus="autofocus">
-                        <label for="inputEmail">Email</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               ng-model="mainCtrl.singUpData.email"
+                               class="form-control"
+                               placeholder="Email"
+                               required="required">
+                        <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="text" id="username" class="form-control" placeholder="Tên tài khoản"
+                        <input type="tel"
+                               id="phone"
+                               name="phone"
+                               ng-model="mainCtrl.singUpData.phone"
+                               class="form-control"
+                               placeholder="Số điện thoại"
+                               required="required">
+                        <label for="phone">Số điện thoại</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text"
+                               id="address"
+                               name="address"
+                               ng-model="mainCtrl.singUpData.address"
+                               class="form-control"
+                               placeholder="Địa chỉ">
+                        <label for="address">Địa chỉ</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text"
+                               id="username"
+                               name="username"
+                               ng-model="mainCtrl.singUpData.username"
+                               class="form-control"
+                               placeholder="Tên tài khoản"
                                required="required">
                         <label for="username">Tên tài khoản</label>
                     </div>
@@ -39,25 +80,35 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="password" id="password" class="form-control" placeholder="Mật khẩu"
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       ng-model="mainCtrl.singUpData.password"
+                                       class="form-control"
+                                       placeholder="Mật khẩu"
                                        required="required">
-                                <label for="password">Password</label>
+                                <label for="password">Mật khẩu</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="password" id="confirmPassword" class="form-control"
-                                       placeholder="Nhập lại mật khẩu" required="required">
+                                <input type="password"
+                                       id="confirmPassword"
+                                       name="confirmPassword"
+                                       ng-model="mainCtrl.singUpData.confirmPassword"
+                                       class="form-control"
+                                       placeholder="Nhập lại mật khẩu"
+                                       required="required">
                                 <label for="confirmPassword">Nhập lại mật khẩu</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block" href="login.html">Đăng ký</a>
+                <a class="btn btn-primary btn-block" ng-click="mainCtrl.doSignUp()">Đăng ký</a>
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="/login.html">Đăng nhập</a>
-                <a class="d-block small" href="/forgot-password.html">Quên mật khẩu?</a>
+                <a class="d-block small mt-3" href="/login">Đăng nhập</a>
+                <a class="d-block small" href="/forgot-password">Quên mật khẩu?</a>
             </div>
         </div>
     </div>

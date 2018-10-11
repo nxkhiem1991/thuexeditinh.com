@@ -3,11 +3,12 @@ var Story = require('../models/story');
 var config = require('../../config');
 var SCK = config.secretKey;
 var jsonwebtoken = require('jsonwebtoken');
+var { check, validationResult } = require('express-validator/check');
 
 function createToken(user) {
     var token = jsonwebtoken.sign({
         id: user.id,
-        name: user.name,
+        email: user.email,
         username: user.username,
     }, SCK, {
         expiresIn: '1d'
@@ -18,29 +19,33 @@ function createToken(user) {
 
 module.exports = function (app, express) {
     var api = express.Router();
-
+    var validate = [
+        check('email').isEmail().withMessage('Email không hợp lệ').isEmpty().withMessage('Bạn chưa nhập email'),
+        check('phone').isEmpty().withMessage('Bạn chưa nhập số điện thoại'),
+        check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').isEmpty().withMessage('Bạn chưa nhập tên tài khoản'),
+        check('password').isLength({ min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự').isEmpty().withMessage('Bạn chưa nhập mật khẩu'),
+        check('passwordConfirm').equals('password').withMessage('Mật khẩu nhập lại không chính xác')
+    ];
     //signup
-    api.post('/signup', function (req, res) {
-        var user = new User({
-            name: req.body.name,
-            username: req.body.username,
-            password: req.body.password
-        });
-
-        user.save(function (err) {
-            if(err) {
-                res.send(err);
-                return;
-            }
-
-            res.json({msg: 'Created account!'});
-        });
+    api.post('/signup', validate, (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        // var user = new User(req.body);
+        // user.save(function (err, user) {
+        //     if(err) {
+        //         res.send(err);
+        //         return;
+        //     }
+        //     res.json({success: true, msg: 'Created account!', user: user});
+        // });
     });
 
 
     //user
-    api.get('/users', function (req, res) {
-        User.find({}, function (err, users) {
+    api.get('/users', (req, res) => {
+        User.find({}, (err, users) => {
             if(err) {
                 res.send(err);
                 return;

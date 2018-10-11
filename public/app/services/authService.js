@@ -1,14 +1,20 @@
 angular.module('authService', [])
 .factory('Auth', function ($http, $q, AuthToken) {
     var authFactory = {};
-    authFactory.login = function (username, password) {
-        return $http.post('/api/login',  {
-            username: username,
-            password: password
-        }).then(function (data) {
-            AuthToken.setToken(data.data.token);
-            return data;
-        })
+
+    authFactory.signup = function (data) {
+        return $http.post('/api/signup', data)
+            .then(function (res) {
+               return res;
+            });
+    };
+
+    authFactory.login = function (data) {
+        return $http.post('/api/login', data)
+            .then(function (res) {
+                AuthToken.setToken(res.data.token);
+                return res;
+            })
     };
 
     authFactory.logout = function () {
