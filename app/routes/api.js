@@ -3,7 +3,7 @@ var Story = require('../models/story');
 var config = require('../../config');
 var SCK = config.secretKey;
 var jsonwebtoken = require('jsonwebtoken');
-var { check, validationResult } = require('express-validator/check');
+var {check, validationResult} = require('express-validator/check');
 
 function createToken(user) {
     var token = jsonwebtoken.sign({
@@ -20,26 +20,45 @@ function createToken(user) {
 module.exports = function (app, express) {
     var api = express.Router();
     var validate = [
-        check('email').isEmail().withMessage('Email không hợp lệ').isEmpty().withMessage('Bạn chưa nhập email'),
-        check('phone').isEmpty().withMessage('Bạn chưa nhập số điện thoại'),
-        check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').isEmpty().withMessage('Bạn chưa nhập tên tài khoản'),
-        check('password').isLength({ min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự').isEmpty().withMessage('Bạn chưa nhập mật khẩu'),
-        check('passwordConfirm').equals('password').withMessage('Mật khẩu nhập lại không chính xác')
+        check('email', 'Email không hợp lệ').isEmail(),
+        check('email').custom(value => {
+            if(value) {
+                return User.findOne({email: value}).then(user => {
+                    if (user) {
+                        return Promise.reject('Email đã được đăng ký');
+                    }
+                });
+            }
+        }),
+        check('password', 'Bạn chưa nhập mật khẩu').isLength({min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự'),
+        check('confirmPassword').custom((value, {req}) => {
+            console.log(value);
+            console.log(req.body.password);
+            console.log(value !== req.body.password);
+            if (value !== req.body.password) {
+                throw new Error('Mật khẩu nhập lại không chính xác');
+            }
+        })
+        // check('email').isEmail().withMessage('Email không hợp lệ').isEmpty().withMessage('Bạn chưa nhập email'),
+        // check('phone').isEmpty().withMessage('Bạn chưa nhập số điện thoại'),
+        // check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').isEmpty().withMessage('Bạn chưa nhập tên tài khoản'),
+
+        // check('passwordConfirm').equals('password').withMessage('Mật khẩu nhập lại không chính xác')
     ];
     //signup
-    api.post('/signup', validate, (req, res) => {
+        api.post('/signup', validate, (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        // var user = new User(req.body);
-        // user.save(function (err, user) {
-        //     if(err) {
-        //         res.send(err);
-        //         return;
-        //     }
-        //     res.json({success: true, msg: 'Created account!', user: user});
-        // });
+        var user = new User(req.body);
+        user.save(function (err, user) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+            res.json({success: true, msg: 'Tạo tài khoản thành công', user: user});
+        });
     });
 
 
