@@ -35,10 +35,13 @@
                                id="email"
                                name="email"
                                ng-model="mainCtrl.singUpData.email"
+                               ng-change="mainCtrl.error.email = null"
+                               ng-class="{'border-danger': mainCtrl.error.email}"
                                class="form-control"
                                placeholder="Email"
                                required="required">
-                        <label for="email">Email</label>
+                        <label for="email" ng-if="!mainCtrl.error.email">Email</label>
+                        <label class="text-danger" for="email" ng-if="mainCtrl.error.email">{{mainCtrl.error.email}}</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,10 +50,13 @@
                                id="phone"
                                name="phone"
                                ng-model="mainCtrl.singUpData.phone"
+                               ng-change="mainCtrl.error.phone = null"
+                               ng-class="{'border-danger': mainCtrl.error.phone}"
                                class="form-control"
                                placeholder="Số điện thoại"
                                required="required">
-                        <label for="phone">Số điện thoại</label>
+                        <label for="phone" ng-if="!mainCtrl.error.phone">Số điện thoại</label>
+                        <label class="text-danger" for="phone" ng-if="mainCtrl.error.phone">{{mainCtrl.error.phone}}</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -70,10 +76,13 @@
                                id="username"
                                name="username"
                                ng-model="mainCtrl.singUpData.username"
+                               ng-change="mainCtrl.error.username = null"
+                               ng-class="{'border-danger': mainCtrl.error.username}"
                                class="form-control"
                                placeholder="Tên tài khoản"
                                required="required">
-                        <label for="username">Tên tài khoản</label>
+                        <label for="username" ng-if="!mainCtrl.error.username">Tên tài khoản</label>
+                        <label class="text-danger" for="username" ng-if="mainCtrl.error.username">{{mainCtrl.error.username}}</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -84,10 +93,13 @@
                                        id="password"
                                        name="password"
                                        ng-model="mainCtrl.singUpData.password"
+                                       ng-change="mainCtrl.error.password = null"
+                                       ng-class="{'border-danger': mainCtrl.error.password}"
                                        class="form-control"
                                        placeholder="Mật khẩu"
                                        required="required">
-                                <label for="password">Mật khẩu</label>
+                                <label for="password" ng-if="!mainCtrl.error.password">Mật khẩu</label>
+                                <label class="text-danger" for="password" ng-if="mainCtrl.error.password">{{mainCtrl.error.password}}</label>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -96,10 +108,13 @@
                                        id="confirmPassword"
                                        name="confirmPassword"
                                        ng-model="mainCtrl.singUpData.confirmPassword"
+                                       ng-change="mainCtrl.error.confirmPassword = null"
+                                       ng-class="{'border-danger': mainCtrl.error.confirmPassword}"
                                        class="form-control"
                                        placeholder="Nhập lại mật khẩu"
                                        required="required">
-                                <label for="confirmPassword">Nhập lại mật khẩu</label>
+                                <label for="confirmPassword" ng-if="!mainCtrl.error.confirmPassword">Nhập lại mật khẩu</label>
+                                <label class="text-danger" for="confirmPassword" ng-if="mainCtrl.error.confirmPassword">{{mainCtrl.error.confirmPassword}}</label>
                             </div>
                         </div>
                     </div>

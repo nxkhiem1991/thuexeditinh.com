@@ -20,7 +20,6 @@ function createToken(user) {
 module.exports = function (app, express) {
     var api = express.Router();
     var validate = [
-        check('email', 'Email không hợp lệ').isEmail(),
         check('email').custom(value => {
             if(value) {
                 return User.findOne({email: value}).then(user => {
@@ -29,21 +28,17 @@ module.exports = function (app, express) {
                     }
                 });
             }
-        }),
-        check('password', 'Bạn chưa nhập mật khẩu').isLength({min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự'),
+            return true;
+        }).exists().withMessage('Bạn chưa nhập email').isEmail().withMessage('Email không hợp lệ'),
+        check('phone').isMobilePhone('vi-VN').withMessage('Số điện thoại không hợp lệ').exists().withMessage('Bạn chưa nhập số điện thoại'),
+        check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').exists().withMessage('Bạn chưa nhập tên tài khoản'),
+        check('password').isLength({min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự').exists().withMessage('Bạn chưa nhập mật khẩu'),
         check('confirmPassword').custom((value, {req}) => {
-            console.log(value);
-            console.log(req.body.password);
-            console.log(value !== req.body.password);
             if (value !== req.body.password) {
                 throw new Error('Mật khẩu nhập lại không chính xác');
             }
-        })
-        // check('email').isEmail().withMessage('Email không hợp lệ').isEmpty().withMessage('Bạn chưa nhập email'),
-        // check('phone').isEmpty().withMessage('Bạn chưa nhập số điện thoại'),
-        // check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').isEmpty().withMessage('Bạn chưa nhập tên tài khoản'),
-
-        // check('passwordConfirm').equals('password').withMessage('Mật khẩu nhập lại không chính xác')
+            return true;
+        }).exists().withMessage('Bạn chưa nhập lại mật khẩu'),
     ];
     //signup
         api.post('/signup', validate, (req, res) => {

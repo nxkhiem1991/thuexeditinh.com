@@ -16,16 +16,18 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
 
     vm.doSignUp = function () {
         cfpLoadingBar.start();
-        vm.error = '';
+        vm.error = {};
 
         Auth.signup(vm.singUpData)
             .then(function (res) {
                 cfpLoadingBar.complete();
                 vm.user = res.data.user;
             })
-            .catch(function (err, status) {
+            .catch(function (err) {
                 cfpLoadingBar.complete();
-                vm.error = err.data.validate;
+                angular.forEach(err.data.errors, function(value, key) {
+                    vm.error[value.param] = value.msg;
+                });
             });
     };
 
