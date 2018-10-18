@@ -2,9 +2,10 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
 .config(function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
 })
-.controller('MainController', function ($rootScope, $location, Auth, cfpLoadingBar) {
+.controller('MainController', function ($rootScope, $location, Auth, cfpLoadingBar, toaster) {
     var vm = this;
-
+    vm.register = false;
+    vm.regirerSuccess = $location.search().register;
     vm.loggedIn = Auth.isLoggedIn();
     $rootScope.$on('$routeChangeStart', function () {
         vm.loggedIn = Auth.isLoggedIn();
@@ -22,6 +23,8 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
             .then(function (res) {
                 cfpLoadingBar.complete();
                 vm.user = res.data.user;
+                vm.register = true;
+                $location.search({username: vm.user.username, register: 'success'});
             })
             .catch(function (err) {
                 cfpLoadingBar.complete();

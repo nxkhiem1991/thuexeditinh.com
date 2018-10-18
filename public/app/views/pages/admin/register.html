@@ -1,7 +1,8 @@
+<toaster-container></toaster-container>
 <div class="container" ng-controller="MainController as mainCtrl">
     <div class="card card-register mx-auto mt-5">
         <h4 class="card-header">Đăng ký tài khoản</h4>
-        <div class="card-body">
+        <div ng-show="!mainCtrl.register && !mainCtrl.regirerSuccess" class="card-body">
             <form>
                 <div class="form-group">
                     <div class="form-row">
@@ -125,6 +126,9 @@
                 <a class="d-block small mt-3" href="/login">Đăng nhập</a>
                 <a class="d-block small" href="/forgot-password">Quên mật khẩu?</a>
             </div>
+        </div>
+        <div ng-show="mainCtrl.register || mainCtrl.regirerSuccess" class="card-body">
+            <p><i class="fa fa-check text-info mr-2" aria-hidden="true"></i> Đăng ký tài khoản thành công !</p>
         </div>
     </div>
 </div>
