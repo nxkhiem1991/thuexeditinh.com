@@ -6,23 +6,31 @@
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="text"
-                               id="userName"
-                               class="form-control"
+                               id="username"
+                               name="username"
                                ng-model="loginData.username"
+                               ng-change="error.username = null"
+                               ng-class="{'border-danger': error.username}"
+                               class="form-control"
                                placeholder="Tên tài khoản"
-                               required="required" autofocus="autofocus">
-                        <label for="userName">Tên tài khoản</label>
+                               required="required">
+                        <label for="username" ng-if="!error.username">Tên tài khoản</label>
+                        <label class="text-danger" for="username" ng-if="error.username">{{error.username}}</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="password"
                                id="password"
-                               class="form-control"
+                               name="password"
                                ng-model="loginData.password"
+                               ng-change="error.password = null"
+                               ng-class="{'border-danger': error.password}"
+                               class="form-control"
                                placeholder="Mật khẩu"
                                required="required">
-                        <label for="password">Mật khẩu</label>
+                        <label for="password" ng-if="!error.password">Mật khẩu</label>
+                        <label class="text-danger" for="password" ng-if="error.password">{{error.password}}</label>
                     </div>
                 </div>
                 <div class="form-group">

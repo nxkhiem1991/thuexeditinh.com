@@ -19,7 +19,7 @@ function createToken(user) {
 
 module.exports = function (app, express) {
     var api = express.Router();
-    var validate = [
+    var validateSignup = [
         check('email').custom(value => {
             if(value) {
                 return User.findOne({email: value}).then(user => {
@@ -40,8 +40,12 @@ module.exports = function (app, express) {
             return true;
         }).exists().withMessage('Bạn chưa nhập lại mật khẩu'),
     ];
+    var validateLogin = [
+        check('username').exists().withMessage('Bạn chưa nhập tên tài khoản'),
+        check('password').exists().withMessage('Bạn chưa nhập lại mật khẩu')
+    ];
     //signup
-        api.post('/signup', validate, (req, res) => {
+        api.post('/signup', validateSignup, (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
@@ -70,7 +74,11 @@ module.exports = function (app, express) {
 
 
     //login
-    api.post('/login', function (req, res) {
+    api.post('/login', validateLogin, function (req, res) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         User.findOne({
             username: req.body.username
         }).select('password').exec(function (err, user) {

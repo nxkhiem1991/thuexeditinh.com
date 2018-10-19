@@ -11,13 +11,13 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
     $scope.loggedIn = Auth.isLoggedIn();
     $scope.singUpData = {};
 
-    $rootScope.$on('$routeChangeStart', function () {
-        $scope.loggedIn = Auth.isLoggedIn();
-
-        Auth.getUser().then(function (data) {
-            $scope.user = data.data;
-        })
-    });
+    // $rootScope.$on('$routeChangeStart', function () {
+    //     $scope.loggedIn = Auth.isLoggedIn();
+    //
+    //     Auth.getUser().then(function (data) {
+    //         $scope.user = data.data;
+    //     })
+    // });
 
     $scope.doSignUp = function () {
         cfpLoadingBar.start();
@@ -47,9 +47,12 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
                 });
                 if(data.data.success) {
                     $location.path('/admin');
-                } else {
-                    return $scope.error = data.data.msg;
                 }
+            })
+            .catch(function (err) {
+                angular.forEach(err.data.errors, function(value, key) {
+                    $scope.error[value.param] = value.msg;
+                });
             });
     };
 

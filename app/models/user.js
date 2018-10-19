@@ -9,7 +9,9 @@ var userSchema = new Schema({
     phone: String,
     address: String,
     username: {type: String, required: true, index: {unique: true}},
-    password: {type: String, required: true, select: false}
+    password: {type: String, required: true, select: false},
+    role: { type: String, default: 'user'},
+    created: {type: Date, default: Date.now()}
 });
 
 userSchema.pre('save', function (next) {
