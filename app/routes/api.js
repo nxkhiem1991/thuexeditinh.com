@@ -71,7 +71,6 @@ module.exports = function (app, express) {
 
     //login
     api.post('/login', function (req, res) {
-        console.log(req);
         User.findOne({
             username: req.body.username
         }).select('password').exec(function (err, user) {

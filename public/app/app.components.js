@@ -1,3 +1,4 @@
+'use strict';
 angular.module('myComponent', ['config'])
     .component('headerAdmin', {
         templateUrl: function(route){
@@ -12,5 +13,10 @@ angular.module('myComponent', ['config'])
     .component('breadCrumb', {
         templateUrl: function(route){
             return route.views + 'admin/layouts/breadcrumb.html';
-    }
-});
+        }
+    })
+    .component('mainMenu', {
+        templateUrl: function (route) {
+            return route.views + '/layouts/main-menu.html';
+        }
+    });

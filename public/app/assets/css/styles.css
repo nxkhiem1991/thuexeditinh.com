@@ -1,3 +1,14 @@
+.phone-number {
+    width: 50%;
+    margin-left: 30px;
+}
+.phone-number a {
+    font-size: 30px;
+    color: #19556f;
+}
+.phone-number a i {
+    margin-right: 5px;
+}
 .nav-item a {
     border-bottom: 2px solid rgba(192, 192, 192, 0);
     -webkit-transition: border 500ms ease;
@@ -8,4 +19,14 @@
 }
 .nav-item a:hover {
     border-bottom: 2px solid rgba(192, 192, 192, 1);
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #49b2b7;
+}
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+    color: #49b2b7;
+    border-bottom: 2px solid #49b2b7;
+}
+.main-menu {
+    border-bottom: solid 2px #49b2b7;
 }

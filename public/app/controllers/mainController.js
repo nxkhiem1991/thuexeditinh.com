@@ -1,60 +1,72 @@
+'use strict';
 angular.module('mainCtrl', ['chieffancypants.loadingBar'])
 .config(function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
 })
-.controller('MainController', function ($rootScope, $location, Auth, cfpLoadingBar, toaster) {
-    var vm = this;
-    vm.register = false;
-    vm.regirerSuccess = $location.search().register;
-    vm.loggedIn = Auth.isLoggedIn();
+.controller('AuthController', function ($rootScope, $scope, $location, Auth, cfpLoadingBar, toaster) {
+    $scope.user = {};
+    $scope.register = false;
+    $scope.error = {};
+    $scope.regirerSuccess = $location.search().register;
+    $scope.loggedIn = Auth.isLoggedIn();
+    $scope.singUpData = {};
+
     $rootScope.$on('$routeChangeStart', function () {
-        vm.loggedIn = Auth.isLoggedIn();
+        $scope.loggedIn = Auth.isLoggedIn();
 
         Auth.getUser().then(function (data) {
-            vm.user = data.data;
+            $scope.user = data.data;
         })
     });
 
-    vm.doSignUp = function () {
+    $scope.doSignUp = function () {
         cfpLoadingBar.start();
-        vm.error = {};
-
-        Auth.signup(vm.singUpData)
+        Auth.signup($scope.singUpData)
             .then(function (res) {
                 cfpLoadingBar.complete();
-                vm.user = res.data.user;
-                vm.register = true;
-                $location.search({username: vm.user.username, register: 'success'});
+                $scope.user = res.data.user;
+                $scope.register = true;
+                $location.search({username: $scope.user.username, register: 'success'});
             })
             .catch(function (err) {
                 cfpLoadingBar.complete();
                 angular.forEach(err.data.errors, function(value, key) {
-                    vm.error[value.param] = value.msg;
+                    $scope.error[value.param] = value.msg;
                 });
             });
     };
 
-    vm.doLogin = function () {
-        vm.processing = true;
-        vm.error = '';
-
-        Auth.login(vm.loginData)
+    $scope.doLogin = function () {
+        cfpLoadingBar.start();
+        Auth.login($scope.loginData)
             .then(function (data) {
-                vm.processing = false;
+                cfpLoadingBar.complete();
+                $scope.processing = false;
                 Auth.getUser().then(function (data) {
-                    vm.user = data.data;
+                    $scope.user = data.data;
                 });
-
                 if(data.data.success) {
-                    $location.path('/');
+                    $location.path('/admin');
                 } else {
-                    return vm.error = data.data.msg;
+                    return $scope.error = data.data.msg;
                 }
             });
     };
 
-    vm.doLogout = function () {
+    $scope.doLogout = function () {
         Auth.logout();
         $location.path('/logout');
     }
+})
+.controller('AdminController', function ($rootScope, $scope, $location, Auth, cfpLoadingBar, toaster) {
+    $rootScope.$on('$routeChangeStart', function (event) {
+        $scope.loggedIn = Auth.isLoggedIn();
+        if(!$scope.loggedIn) {
+            event.preventDefault();
+            $location.path('/login');
+        }
+        Auth.getUser().then(function (data) {
+            $scope.user = data.data;
+        })
+    });
 })
