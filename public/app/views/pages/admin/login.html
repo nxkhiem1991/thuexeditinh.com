@@ -1,18 +1,26 @@
-<div class="container">
+<div class="container" ng-controller="MainController as mainCtrl">
     <div class="card card-login mx-auto mt-5">
         <h4 class="card-header">Đăng nhập quản trị</h4>
         <div class="card-body">
             <form>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="text" id="userName" class="form-control" placeholder="Tên tài khoản"
+                        <input type="text"
+                               id="userName"
+                               class="form-control"
+                               ng-model="mainCtrl.loginData.username"
+                               placeholder="Tên tài khoản"
                                required="required" autofocus="autofocus">
                         <label for="userName">Tên tài khoản</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="password" id="password" class="form-control" placeholder="Mật khẩu"
+                        <input type="password"
+                               id="password"
+                               class="form-control"
+                               ng-model="mainCtrl.loginData.password"
+                               placeholder="Mật khẩu"
                                required="required">
                         <label for="password">Mật khẩu</label>
                     </div>
@@ -25,7 +33,7 @@
                         </label>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block" href="/admin">Đăng nhập</a>
+                <a class="btn btn-primary btn-block" ng-click="mainCtrl.doLogin()">Đăng nhập</a>
             </form>
             <div class="text-center">
                 <a class="d-block small mt-3" href="/register">Đăng ký tài khoản</a>

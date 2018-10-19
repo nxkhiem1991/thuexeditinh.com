@@ -38,7 +38,7 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
         vm.processing = true;
         vm.error = '';
 
-        Auth.login(vm.loginData.username, vm.loginData.password)
+        Auth.login(vm.loginData)
             .then(function (data) {
                 vm.processing = false;
                 Auth.getUser().then(function (data) {
@@ -48,7 +48,7 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
                 if(data.data.success) {
                     $location.path('/');
                 } else {
-                    return vm.error = data.msg;
+                    return vm.error = data.data.msg;
                 }
             });
     };

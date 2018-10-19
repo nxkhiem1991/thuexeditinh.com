@@ -31,7 +31,7 @@ module.exports = function (app, express) {
             return true;
         }).exists().withMessage('Bạn chưa nhập email').isEmail().withMessage('Email không hợp lệ'),
         check('phone').isMobilePhone('vi-VN').withMessage('Số điện thoại không hợp lệ').exists().withMessage('Bạn chưa nhập số điện thoại'),
-        check('username').matches('^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$').withMessage('Tên tài khoản không hợp lệ').exists().withMessage('Bạn chưa nhập tên tài khoản'),
+        check('username').matches('^[a-zA-Z0-9]+$').withMessage('Tên tài khoản không hợp lệ').exists().withMessage('Bạn chưa nhập tên tài khoản'),
         check('password').isLength({min: 6 }).withMessage('Mật khẩu ít nhất có 6 ký tự').exists().withMessage('Bạn chưa nhập mật khẩu'),
         check('confirmPassword').custom((value, {req}) => {
             if (value !== req.body.password) {
@@ -71,6 +71,7 @@ module.exports = function (app, express) {
 
     //login
     api.post('/login', function (req, res) {
+        console.log(req);
         User.findOne({
             username: req.body.username
         }).select('password').exec(function (err, user) {
