@@ -6,6 +6,7 @@ var tripSchema = new Schema({
     type: String,
     from: String,
     to: String,
+    distance: Number,
     price: Number,
     created: {type: Date, default: Date.now()}
 });

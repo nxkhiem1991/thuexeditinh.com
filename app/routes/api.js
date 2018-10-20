@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var Story = require('../models/story');
+var Trip = require('../models/trip');
 var config = require('../../config');
 var SCK = config.secretKey;
 var jsonwebtoken = require('jsonwebtoken');
@@ -84,7 +85,7 @@ module.exports = function (app, express) {
         }).select('password').exec(function (err, user) {
             if(err) throw err;
             if(!user) {
-                res.send({msg: "User dosenot exist!"})
+                res.send({msg: "User dosenot exist!"});
             } else {
                 var validPassword = user.comparePassword(req.body.password);
                 if(!validPassword) {
@@ -118,27 +119,23 @@ module.exports = function (app, express) {
         }
     });
 
-    api.route('/')
+    api.route('/create-trip')
         .post(function (req, res) {
-            var story = new Story({
-                creator: req.decoded.id,
-                content: req.body.content
-            });
-
-            story.save(function (err) {
+            var trip = new Trip(req.body);
+            trip.save(function (err, trip) {
                 if(err) {
                     res.send(err);
                     return;
                 }
-                res.json({msg: "New stroy created!"});
+                res.json({success: true, msg: "New trip created!", trip: trip});
             });
         }).get(function (req, res) {
-            Story.find({creator: req.decoded.id}, function (err, stories) {
+            Story.find({_id: req.decoded.id}, function (err, trip) {
                 if(err) {
                     res.send(err);
                     return;
                 }
-                res.json(stories);
+                res.json(trip);
             });
         });
 

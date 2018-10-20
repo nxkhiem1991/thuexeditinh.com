@@ -1,0 +1,148 @@
+<header-admin></header-admin>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <sidebar-admin></sidebar-admin>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <bread-crumb></bread-crumb>
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4 style="width: 20%;"><i class="fa fa-plus-circle" aria-hidden="true"></i>Thêm mới tuyến xe</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="form-horizontal" role="form">
+                                <fieldset>
+                                    <!-- Form Name -->
+                                    <legend>Thông tin tuyến xe</legend>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="from">Điểm đi</label>
+                                        <div class="col-sm-10">
+                                            <input id="from"
+                                                   name="from"
+                                                   type="text"
+                                                   placeholder="Điểm đi"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="to">Điểm đến</label>
+                                        <div class="col-sm-10">
+                                            <input id="to"
+                                                   name="to"
+                                                   type="text"
+                                                   placeholder="Điểm đến"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="distance">Quãng đường</label>
+                                        <div class="col-sm-4">
+                                            <input id="distance"
+                                                   name="distance"
+                                                   type="number"
+                                                   min="0"
+                                                   placeholder="0"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="type">Tuyến xe</label>
+                                        <div class="col-sm-4">
+                                            <select id="type"
+                                                    name="type"
+                                                    type="text"
+                                                    class="form-control">
+                                                    <option value="tinh">Đi tỉnh</option>
+                                                    <option value="tour">Đi tour</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="col-sm-2 control-label" for="car">Loại xe</label>
+                                        <div class="col-sm-4">
+                                            <select id="car"
+                                                    name="car"
+                                                    type="text"
+                                                    class="form-control">
+                                                <option value="5">Xe 5 chỗ</option>
+                                                <option value="7">Xe 7 chô</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="price">Giá tiền</label>
+                                        <div class="col-sm-10">
+                                            <input id="price"
+                                                   name="price"
+                                                   type="number"
+                                                   placeholder="0"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="pull-right">
+                                                <button type="reset" class="btn btn-default">Hủy</button>
+                                                <button class="btn btn-success">Tạo mới</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div><!-- /.col-lg-12 -->
+                    </div><!-- /.row -->
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2018</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="../login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+

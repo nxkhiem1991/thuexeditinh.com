@@ -30,3 +30,14 @@
 .main-menu {
     border-bottom: solid 2px #49b2b7;
 }
+
+/*Admin*/
+.card-header {
+    display: flex;
+}
+.card-header h4{
+    width: 10%;
+}
+.card-header h4 i {
+    margin-right: 10px;
+}
