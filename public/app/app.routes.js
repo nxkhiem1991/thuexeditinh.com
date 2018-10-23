@@ -37,7 +37,8 @@ angular.module('appRoutes', ['ngRoute', 'config', 'mainCtrl'])
             templateUrl: route.views + 'admin/trips/province-trips.html'
         })
         .when('/create-trip', {
-            templateUrl: route.views + 'admin/trips/create-trip.html'
+            templateUrl: route.views + 'admin/trips/create-trip.html',
+            controller: 'TripController'
         }).
         otherwise('/');
 });

@@ -129,16 +129,8 @@ module.exports = function (app, express) {
                 }
                 res.json({success: true, msg: "New trip created!", trip: trip});
             });
-        }).get(function (req, res) {
-            Story.find({_id: req.decoded.id}, function (err, trip) {
-                if(err) {
-                    res.send(err);
-                    return;
-                }
-                res.json(trip);
-            });
         });
-
+    
     api.get('/me', function (req, res) {
         return res.json(req.decoded);
     });

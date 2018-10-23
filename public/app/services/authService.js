@@ -1,3 +1,4 @@
+'use strict';
 angular.module('authService', [])
 .factory('Auth', function ($http, $q, AuthToken) {
     var authFactory = {};
@@ -57,18 +58,17 @@ angular.module('authService', [])
    authInterceptorFactory.request = function (config) {
        var token = AuthToken.getToken();
        if(token) {
-           config.header['x-access-token'] = token;
+           config.headers['x-access-token'] = token;
        }
 
        return config;
    };
 
-   authInterceptorFactory.responeError = function (res) {
-     if(res.status == 403) {
-         $location.path('/login');
-
-         return $q.reject(res);
-     }
+   authInterceptorFactory.responseError = function (res) {
+       if(res.status == 403) {
+           $location.path('/login');
+       }
+       return $q.reject(res);
    };
 
    return authInterceptorFactory;

@@ -25,6 +25,7 @@
                                             <input id="from"
                                                    name="from"
                                                    type="text"
+                                                   ng-model="tripData.from"
                                                    placeholder="Điểm đi"
                                                    class="form-control">
                                         </div>
@@ -36,6 +37,7 @@
                                             <input id="to"
                                                    name="to"
                                                    type="text"
+                                                   ng-model="tripData.to"
                                                    placeholder="Điểm đến"
                                                    class="form-control">
                                         </div>
@@ -47,6 +49,7 @@
                                             <input id="distance"
                                                    name="distance"
                                                    type="number"
+                                                   ng-model="tripData.distance"
                                                    min="0"
                                                    placeholder="0"
                                                    class="form-control">
@@ -59,6 +62,7 @@
                                             <select id="type"
                                                     name="type"
                                                     type="text"
+                                                    ng-model="tripData.type"
                                                     class="form-control">
                                                     <option value="tinh">Đi tỉnh</option>
                                                     <option value="tour">Đi tour</option>
@@ -70,6 +74,7 @@
                                             <select id="car"
                                                     name="car"
                                                     type="text"
+                                                    ng-model="tripData.car"
                                                     class="form-control">
                                                 <option value="5">Xe 5 chỗ</option>
                                                 <option value="7">Xe 7 chô</option>
@@ -83,6 +88,7 @@
                                             <input id="price"
                                                    name="price"
                                                    type="number"
+                                                   ng-model="tripData.price"
                                                    placeholder="0"
                                                    class="form-control">
                                         </div>
@@ -91,7 +97,7 @@
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="pull-right">
                                                 <button type="reset" class="btn btn-default">Hủy</button>
-                                                <button class="btn btn-success">Tạo mới</button>
+                                                <button class="btn btn-success" ng-click="createTrip()">Tạo mới</button>
                                             </div>
                                         </div>
                                     </div>

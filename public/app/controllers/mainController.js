@@ -39,13 +39,13 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
     $scope.doLogin = function () {
         cfpLoadingBar.start();
         Auth.login($scope.loginData)
-            .then(function (data) {
+            .then(function (res) {
                 cfpLoadingBar.complete();
                 $scope.processing = false;
-                Auth.getUser().then(function (data) {
-                    $scope.user = data.data;
+                Auth.getUser().then(function (res) {
+                    $scope.user = res.data;
                 });
-                if(data.data.success) {
+                if(res.data.success) {
                     $location.path('/admin');
                 }
             })
@@ -68,8 +68,22 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
             event.preventDefault();
             $location.path('/login');
         }
-        Auth.getUser().then(function (data) {
-            $scope.user = data.data;
+        Auth.getUser().then(function (res) {
+            $scope.user = res.data;
         })
     });
+})
+.controller('TripController', function ($rootScope, $scope, $location, Trip, cfpLoadingBar, toaster) {
+    $scope.tripData = {};
+
+
+    $scope.createTrip = function () {
+        cfpLoadingBar.start();
+        console.log($scope.tripData);
+        Trip.createTrip($scope.tripData)
+            .then(function (res) {
+                cfpLoadingBar.complete();
+                console.log(res);
+            })
+    };
 })
