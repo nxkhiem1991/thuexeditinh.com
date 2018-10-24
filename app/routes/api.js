@@ -1,5 +1,4 @@
 var User = require('../models/user');
-var Story = require('../models/story');
 var Trip = require('../models/trip');
 var config = require('../../config');
 var SCK = config.secretKey;
@@ -129,6 +128,18 @@ module.exports = function (app, express) {
                 }
                 res.json({success: true, msg: "New trip created!", trip: trip});
             });
+        });
+
+    api.route('/province-trip')
+        .get(function (req, res) {
+            Trip.find({type: 'tinh'}, function (err, trips) {
+                if(err) {
+                    res.send(err);
+                    return;
+                }
+                console.log(trips);
+                res.json(trips);
+            })
         });
     
     api.get('/me', function (req, res) {

@@ -1,3 +1,4 @@
+<toaster-container></toaster-container>
 <header-admin></header-admin>
 <div id="wrapper">
     <!-- Sidebar -->
@@ -9,17 +10,17 @@
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 style="width: 20%;"><i class="fa fa-plus-circle" aria-hidden="true"></i>Thêm mới tuyến xe</h4>
+                    <h4><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới tuyến xe</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <form class="form-horizontal" role="form">
                                 <fieldset>
                                     <!-- Form Name -->
-                                    <legend>Thông tin tuyến xe</legend>
+                                    <legend class="mb-3">Thông tin tuyến xe</legend>
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         <label class="col-sm-2 control-label" for="from">Điểm đi</label>
                                         <div class="col-sm-10">
                                             <input id="from"
@@ -31,7 +32,7 @@
                                         </div>
                                     </div>
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         <label class="col-sm-2 control-label" for="to">Điểm đến</label>
                                         <div class="col-sm-10">
                                             <input id="to"
@@ -43,20 +44,7 @@
                                         </div>
                                     </div>
                                     <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="distance">Quãng đường</label>
-                                        <div class="col-sm-4">
-                                            <input id="distance"
-                                                   name="distance"
-                                                   type="number"
-                                                   ng-model="tripData.distance"
-                                                   min="0"
-                                                   placeholder="0"
-                                                   class="form-control">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         <label class="col-sm-2 control-label" for="type">Tuyến xe</label>
                                         <div class="col-sm-4">
                                             <select id="type"
@@ -82,9 +70,19 @@
                                         </div>
                                     </div>
                                     <!-- Text input-->
-                                    <div class="form-group">
+                                    <div class="row form-group">
+                                        <label class="col-sm-2 control-label" for="distance">Quãng đường</label>
+                                        <div class="col-sm-4">
+                                            <input id="distance"
+                                                   name="distance"
+                                                   type="number"
+                                                   ng-model="tripData.distance"
+                                                   min="0"
+                                                   placeholder="0"
+                                                   class="form-control">
+                                        </div>
                                         <label class="col-sm-2 control-label" for="price">Giá tiền</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <input id="price"
                                                    name="price"
                                                    type="number"
@@ -93,11 +91,11 @@
                                                    class="form-control">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="row form-group">
+                                        <div class="offset-sm-2 col-sm-4">
                                             <div class="pull-right">
-                                                <button type="reset" class="btn btn-default">Hủy</button>
                                                 <button class="btn btn-success" ng-click="createTrip()">Tạo mới</button>
+                                                <button type="reset" class="btn btn-default">Hủy</button>
                                             </div>
                                         </div>
                                     </div>

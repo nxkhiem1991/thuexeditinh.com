@@ -34,7 +34,11 @@ angular.module('appRoutes', ['ngRoute', 'config', 'mainCtrl'])
             templateUrl: route.views + 'admin/tables.html'
         })
         .when('/province-trip', {
-            templateUrl: route.views + 'admin/trips/province-trips.html'
+            templateUrl: route.views + 'admin/trips/province-trips.html',
+            controller: 'TripController'
+        })
+        .when('/tour-trip', {
+            templateUrl: route.views + 'admin/trips/tour-trips.html'
         })
         .when('/create-trip', {
             templateUrl: route.views + 'admin/trips/create-trip.html',

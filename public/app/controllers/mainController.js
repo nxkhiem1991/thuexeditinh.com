@@ -76,13 +76,19 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
 .controller('TripController', function ($rootScope, $scope, $location, Trip, cfpLoadingBar, toaster) {
     $scope.tripData = {};
 
+    Trip.getProvinceTrips()
+        .then(function (res) {
+            console.log(res);
+        }
+    );
 
     $scope.createTrip = function () {
         cfpLoadingBar.start();
-        console.log($scope.tripData);
         Trip.createTrip($scope.tripData)
             .then(function (res) {
                 cfpLoadingBar.complete();
+                toaster.pop({type: 'success', title: res.data.trip.from + ' - ' + res.data.trip.to,body: 'Tạo tuyến xe đi tỉnh thành công'});
+                $scope.tripData = {};
                 console.log(res);
             })
     };
