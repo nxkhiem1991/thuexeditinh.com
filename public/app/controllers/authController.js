@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mainCtrl', ['chieffancypants.loadingBar'])
+angular.module('authCtrl', ['chieffancypants.loadingBar'])
 .config(function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
 })
@@ -50,29 +50,5 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
     $scope.doLogout = function () {
         Auth.logout();
         $location.path('/logout');
-    };
-})
-.controller('AdminController', function ($rootScope, $scope, $location, Auth, cfpLoadingBar, toaster) {
-
-})
-.controller('TripController', function ($rootScope, $scope, $location, Trip, cfpLoadingBar, toaster) {
-    $scope.tripData = {};
-
-    $scope.getTrip = function () {
-        Trip.getProvinceTrips()
-            .then(function (res) {
-                    console.log(res.data);
-                }
-            );
-    };
-
-    $scope.createTrip = function () {
-        cfpLoadingBar.start();
-        Trip.createTrip($scope.tripData)
-            .then(function (res) {
-                cfpLoadingBar.complete();
-                toaster.pop({type: 'success', title: res.data.trip.from + ' - ' + res.data.trip.to,body: 'Thêm tuyến xe thành công'});
-                $scope.tripData = {};
-            });
     };
 });

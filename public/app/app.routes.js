@@ -1,5 +1,5 @@
 'use strict';
-angular.module('appRoutes', ['ngRoute', 'config', 'mainCtrl'])
+angular.module('appRoutes', ['ngRoute', 'config', 'authCtrl', 'adminCtrl', 'tripCtrl'])
 .config(function ($routeProvider, $locationProvider, route) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('');
