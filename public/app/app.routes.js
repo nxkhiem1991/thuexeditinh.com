@@ -25,10 +25,7 @@ angular.module('appRoutes', ['ngRoute', 'config', 'mainCtrl'])
         })
         .when('/admin', {
             templateUrl: route.views + 'admin/admin.html',
-            controller: 'AdminController'
-        })
-        .when('/charts', {
-            templateUrl: route.views + 'admin/charts.html'
+            controller: 'AdminController',
         })
         .when('/tables', {
             templateUrl: route.views + 'admin/tables.html'

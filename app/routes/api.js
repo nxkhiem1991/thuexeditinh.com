@@ -118,29 +118,27 @@ module.exports = function (app, express) {
         }
     });
 
-    api.route('/create-trip')
-        .post(function (req, res) {
-            var trip = new Trip(req.body);
-            trip.save(function (err, trip) {
-                if(err) {
-                    res.send(err);
-                    return;
-                }
-                res.json({success: true, msg: "New trip created!", trip: trip});
-            });
+    api.post('/create-trip', (req, res) => {
+        var trip = new Trip(req.body);
+        trip.save(function (err, trip) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+            res.json({success: true, msg: "New trip created!", trip: trip});
         });
+    });
 
-    api.route('/province-trip')
-        .get(function (req, res) {
-            Trip.find({type: 'tinh'}, function (err, trips) {
-                if(err) {
-                    res.send(err);
-                    return;
-                }
-                console.log(trips);
-                res.json(trips);
-            })
+    api.post('/province-trip', (req, res) => {
+        console.log(req);
+        Trip.find({type: 'tinh'}, function (err, trips) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+            res.json(trips);
         });
+    });
     
     api.get('/me', function (req, res) {
         return res.json(req.decoded);

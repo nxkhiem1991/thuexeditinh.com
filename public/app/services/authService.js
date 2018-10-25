@@ -15,12 +15,12 @@ angular.module('authService', [])
             .then(function (res) {
                 AuthToken.setToken(res.data.token);
                 return res;
-            })
+            });
     };
 
     authFactory.logout = function () {
         AuthToken.setToken();
-    }
+    };
 
     authFactory.isLoggedIn = function () {
       return AuthToken.getToken() ? true : false;
@@ -39,7 +39,7 @@ angular.module('authService', [])
 .factory('AuthToken', function ($window) {
     var authTokenFactory = {};
     authTokenFactory.getToken = function () {
-        return $window.localStorage.getItem('token')
+        return $window.localStorage.getItem('token');
     };
 
     authTokenFactory.setToken = function (token) {
@@ -65,7 +65,7 @@ angular.module('authService', [])
    };
 
    authInterceptorFactory.responseError = function (res) {
-       if(res.status == 403) {
+       if(res.status === 403) {
            $location.path('/login');
        }
        return $q.reject(res);

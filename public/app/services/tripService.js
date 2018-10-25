@@ -8,8 +8,8 @@ angular.module('tripService', [])
     };
     
     tripFactory.getProvinceTrips = function () {
-        return $http.get('/api/province-trip');
+        return $http.post('/api/province-trip');
     };
 
     return tripFactory;
-})
+});

@@ -8,16 +8,7 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
     $scope.register = false;
     $scope.error = {};
     $scope.regirerSuccess = $location.search().register;
-    $scope.loggedIn = Auth.isLoggedIn();
     $scope.singUpData = {};
-
-    // $rootScope.$on('$routeChangeStart', function () {
-    //     $scope.loggedIn = Auth.isLoggedIn();
-    //
-    //     Auth.getUser().then(function (data) {
-    //         $scope.user = data.data;
-    //     })
-    // });
 
     $scope.doSignUp = function () {
         cfpLoadingBar.start();
@@ -59,37 +50,29 @@ angular.module('mainCtrl', ['chieffancypants.loadingBar'])
     $scope.doLogout = function () {
         Auth.logout();
         $location.path('/logout');
-    }
+    };
 })
 .controller('AdminController', function ($rootScope, $scope, $location, Auth, cfpLoadingBar, toaster) {
-    $rootScope.$on('$routeChangeStart', function (event) {
-        $scope.loggedIn = Auth.isLoggedIn();
-        if(!$scope.loggedIn) {
-            event.preventDefault();
-            $location.path('/login');
-        }
-        Auth.getUser().then(function (res) {
-            $scope.user = res.data;
-        })
-    });
+
 })
 .controller('TripController', function ($rootScope, $scope, $location, Trip, cfpLoadingBar, toaster) {
     $scope.tripData = {};
 
-    Trip.getProvinceTrips()
-        .then(function (res) {
-            console.log(res);
-        }
-    );
+    $scope.getTrip = function () {
+        Trip.getProvinceTrips()
+            .then(function (res) {
+                    console.log(res.data);
+                }
+            );
+    };
 
     $scope.createTrip = function () {
         cfpLoadingBar.start();
         Trip.createTrip($scope.tripData)
             .then(function (res) {
                 cfpLoadingBar.complete();
-                toaster.pop({type: 'success', title: res.data.trip.from + ' - ' + res.data.trip.to,body: 'Tạo tuyến xe đi tỉnh thành công'});
+                toaster.pop({type: 'success', title: res.data.trip.from + ' - ' + res.data.trip.to,body: 'Thêm tuyến xe thành công'});
                 $scope.tripData = {};
-                console.log(res);
-            })
+            });
     };
-})
+});
